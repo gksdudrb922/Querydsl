@@ -22,6 +22,7 @@ import static study.querydsl.entity.QTeam.team;
 
 public class MemberRepositoryImpl implements MemberRepositoryCustom {
 
+
     private final JPAQueryFactory queryFactory;
 
     public MemberRepositoryImpl(EntityManager em) {
@@ -99,6 +100,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
         JPAQuery<Member> countQuery = queryFactory
                 .select(member)
                 .from(member)
+                .leftJoin(member.team, team)
                 .where(
                         usernameEq(condition.getUsername()),
                         teamNameEq(condition.getTeamName()),
